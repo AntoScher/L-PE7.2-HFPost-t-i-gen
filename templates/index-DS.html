@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Генератор изображений</title>
+    <link rel="stylesheet" href="/static/style-DS.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Генератор изображений</h1>
+        <input type="text" id="themeInput" placeholder="Введите тему">
+        <button id="generateBtn">Сгенерировать</button>
+
+        <div class="result-container">
+            <div id="promptOutput"></div>
+            <img id="generatedImage" style="display:none;">
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('generateBtn').addEventListener('click', async () => {
+            const theme = document.getElementById('themeInput').value;
+            const response = await fetch('/generate', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({ theme })
+            });
+
+            const data = await response.json();
+
+            // Показываем промпт
+            document.getElementById('promptOutput').textContent = data.prompt;
+
+            // Показываем изображение
+            const img = document.getElementById('generatedImage');
+            img.src = data.image_url;
+            img.style.display = 'block';
+        });
+    </script>
+</body>
+</html>
