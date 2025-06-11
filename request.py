@@ -3,7 +3,7 @@ import requests
 url = "http://localhost:5000/generate_images"
 data = {
     "prompt": "Закат над океаном",
-    "model": "stabilityai/stable-diffusion-2-1",
+    "model": "CompVis/stable-diffusion-v1-4",
     "count": 2,
     "ratio": "16/9"
 }
