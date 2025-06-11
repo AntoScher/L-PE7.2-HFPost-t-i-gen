@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <button id="generateBtn">Сгенерировать промпт</button>
+    <div id="promptContainer"></div>
+    <script>
+        document.getElementById('generateBtn').addEventListener('click', async () => {
+            const response = await fetch('/generate_prompt', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({ theme: 'фэнтези' })
+            });
+            const data = await response.json();
+            document.getElementById('promptContainer').innerText = data.prompt;
+        });
+    </script>
+</body>
+</html>
